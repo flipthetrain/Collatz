@@ -18,7 +18,14 @@ namespace Collatz
         static void SimpleCoefficients()
         {
             ICoefficientsEngine ce = new SimpleCoefficient();
-            var x = new Tuple<int, int, int>(0, 1, 0);
+            int cg = 0;
+            List<(int, int, int)> ps = new List<(int, int, int)>() { (0, 1, 0) };
+            while (true)
+            {
+                ps = ps.Union(ps.Select(c => ce.NextEven(c)).Union(ps.Where(c => c.Item1 == cg).Select(c => ce.NextOdd(c)))).ToList();
+                var tmp = ps.OrderBy(c => c.Item2).ThenBy(c => c.Item3).ThenBy(c => c.Item1).ToList();
+                cg++;
+            }
         }
 
         static void Memory()

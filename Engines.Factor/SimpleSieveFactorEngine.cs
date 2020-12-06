@@ -38,17 +38,14 @@ namespace Engines.Factor
             // 0 and 1 are special cases
             if (n == 0 || n == 1) return factors.ToArray();
 
-            // 2 is a special case
-            while (n % 2 == 0)
+            // seed initial primes
+            // 2 is special in that it's even
+            // 3 is the first odd prime and all other primes after are odd
+            if (primes.Count == 0)
             {
-                n = n / 2;
-                power++;
+                primes.Add(2);
+                primes.Add(3);
             }
-            if (power != 0) factors.Add((2, power));
-            if (n == 1) return factors.ToArray();
-
-            // all other primes are odd
-            if (primes.Count == 0) primes.Add(3);
 
             int startIndex = 0;
             while (n > 1)

@@ -6,7 +6,7 @@ namespace Engine.Coefficients
     {
         public (int, int, int) NextEven((int, int, int) current)
         {
-            int d = current.Item1+1;
+            int d = current.Item1 + 1;
             int a = current.Item2;
             int b = current.Item3;
 
@@ -17,9 +17,9 @@ namespace Engine.Coefficients
         {
             int d = current.Item1;
             int a = current.Item2 * 3;
-            int b = current.Item3 * 3 + 1;
+            int b = current.Item3 * 3 + 1 + ((current.Item1>0) ? 2 ^ current.Item1 : 0);
 
-            return (d,a,b);
+            return (d, a, b);
         }
     }
 }
